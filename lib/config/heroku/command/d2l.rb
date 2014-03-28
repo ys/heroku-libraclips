@@ -18,14 +18,14 @@ class Heroku::Command::D2L < Heroku::Command::Base
     puts JSON.pretty_generate(JSON.parse(res.body))
   end
 
-  # add [dataclip_reference]
+  # add [dataclip]
   #
   # Add a measurment for dataclip
   #
   #
-  # -l, --librato BASENAME  # specify librato base name
-  # -s, --source LIBRATOSOURCE
-  # -i, --interval RUNINTERVAL
+  # -l, --librato  BASENAME  # specify librato base name
+  # -s, --source   LIBRATOSOURCE # the source
+  # -i, --interval RUNINTERVAL # the interval
   #
   def add
     dataclip_reference = shift_argument
