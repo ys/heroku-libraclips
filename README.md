@@ -3,13 +3,11 @@ heroku-libraclips
 
 Heroku CLI plugins for libraclips
 
-**WARNING: code is crappy and contains basic auth information for the moment**
-I just need to figure out how to deal with external gems here with vendoring and all that.
-
 ## Install
 
 ```
 $ heroku plugins:install git@github.com:ys/heroku-libraclips.git
+$ printf "machine libraclips.herokuapp.com\n\tlogin REPLACEMEWITHLOGIN\n\tpassword REPLACEMEWITHPASSWORD" >> ~/.netrc
 ```
 
 
