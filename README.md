@@ -22,7 +22,7 @@ $ printf "machine libraclips.herokuapp.com\n\tlogin REPLACEMEWITHLOGIN\n\tpasswo
 ### List
 
 ```
-Usage: heroku list
+Usage: heroku d2l:list
 
  List all the measurements currently active
 ```
@@ -30,7 +30,7 @@ Usage: heroku list
 ### Add 
 
 ```
-Usage: heroku add [dataclip]
+Usage: heroku d2l:add [dataclip]
 
  Add a measurment for dataclip
 
@@ -43,7 +43,7 @@ Usage: heroku add [dataclip]
 ### Update
 
 ```
-Usage: heroku update [id]
+Usage: heroku d2l:update [id]
 
  Update a measurment for dataclip
 
