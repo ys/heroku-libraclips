@@ -12,7 +12,7 @@ class Heroku::Command::D2L < Heroku::Command::Base
   def list
     uri = URI(base_url)
     req = Net::HTTP::Get.new(uri.request_uri)
-    execute_and_print(req)
+    execute_and_print(uri, req)
   end
 
   # add [dataclip]
@@ -30,7 +30,7 @@ class Heroku::Command::D2L < Heroku::Command::Base
     uri = URI(base_url)
     req = Net::HTTP::Post.new(uri.path)
     body = prepare_body(dataclip_reference)
-    execute_and_print(req, body)
+    execute_and_print(uri, req, body)
   end
 
   # update [id]
@@ -50,12 +50,12 @@ class Heroku::Command::D2L < Heroku::Command::Base
     uri = URI("#{base_url}#{id}")
     req = Net::HTTP::Patch.new(uri.path)
     body = prepare_body(dataclip_reference)
-    execute_and_print(req, body)
+    execute_and_print(uri, req, body)
   end
 
   private
 
-  def execute_and_print(req, body = nil)
+  def execute_and_print(uri, req, body = nil)
     if body
       req.body = body.to_json
       req['Content-Type'] = 'application/json'
