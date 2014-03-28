@@ -47,7 +47,7 @@ class Heroku::Command::D2L < Heroku::Command::Base
     id = shift_argument
     validate_arguments!
     dataclip_reference = options[:dataclip]
-    uri = URI("#{base_url}#{id}")
+    uri = URI("#{base_url}/#{id}")
     req = Net::HTTP::Patch.new(uri.path)
     body = prepare_body(dataclip_reference)
     execute_and_print(uri, req, body)
