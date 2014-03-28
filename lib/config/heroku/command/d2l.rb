@@ -60,12 +60,13 @@ class Heroku::Command::D2L < Heroku::Command::Base
   # -d, --dataclip DATACLIP # the dataclip
   #
   def update
-    dataclip_reference = shift_argument
+    id = shift_argument
     validate_arguments!
+    dataclip_reference = options[:dataclip]
     librato_base_name = options[:librato]
     librato_source = options[:source]
     run_interval = options[:interval]
-    uri = URI('http://libraclips.herokuapp.com/measurements')
+    uri = URI("http://libraclips.herokuapp.com/measurements/#{id}")
     req = Net::HTTP::Patch.new(uri.path)
     req.basic_auth 'tools', 'team'
     req['Content-Type'] = 'application/json'
