@@ -4,7 +4,7 @@ require 'heroku/command/base'
 
 class Heroku::Command::D2L < Heroku::Command::Base
 
-  # d2l:list
+  # list
   #
   # List all the measurements currently active
   #
