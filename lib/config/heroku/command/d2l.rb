@@ -1,7 +1,6 @@
-require "faraday"
-require "netrc"
-require "json"
-require "heroku/command/base"
+require 'json'
+require 'net/http'
+require 'heroku/command/base'
 
 class Heroku::Command::D2L < Heroku::Command::Base
 
@@ -10,7 +9,13 @@ class Heroku::Command::D2L < Heroku::Command::Base
   # List all the measurements currently active
   #
   def list
-    puts JSON.pretty_generate(client.get('/measurements').body)
+    uri = URI('http://libraclips.herokuapp.com/measurements')
+    req = Net::HTTP::Get.new(uri)
+    req.basic_auth 'tools', 'team'
+    res = Net::HTTP.start(uri.hostname, uri.port) {|http|
+        http.request(req)
+    }
+    puts JSON.pretty_generate(res.body)
   end
 
   def add
@@ -23,14 +28,5 @@ class Heroku::Command::D2L < Heroku::Command::Base
 
   private
 
-  def client
-    @client ||= Faraday.new(:url => 'http://libraclips.herokuapp.com').tap do |conn|
-      conn.basic_auth(credentials[0], credentials[1])
-    end
-  end
-
-  def credentials
-    @creds ||= Netrc.read['libraclips.herokuapp.com']
-  end
 end
 
