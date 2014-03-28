@@ -67,7 +67,7 @@ class Heroku::Command::D2L < Heroku::Command::Base
     puts JSON.pretty_generate(JSON.parse(res.body))
   end
 
-  def prepare_common_body(dataclip_reference)
+  def prepare_body(dataclip_reference)
     librato_base_name = options[:librato]
     librato_source = options[:source]
     run_interval = options[:interval]
