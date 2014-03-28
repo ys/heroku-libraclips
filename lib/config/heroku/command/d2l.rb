@@ -1,3 +1,4 @@
+require 'netrc'
 require 'json'
 require 'net/http'
 require 'heroku/command/base'
@@ -11,7 +12,7 @@ class Heroku::Command::D2L < Heroku::Command::Base
   def list
     uri = URI('http://libraclips.herokuapp.com/measurements')
     req = Net::HTTP::Get.new(uri.request_uri)
-    req.basic_auth 'tools', 'team'
+    req.basic_auth *creds
     res = Net::HTTP.start(uri.hostname, uri.port) {|http|
       http.request(req)
     }
@@ -35,7 +36,7 @@ class Heroku::Command::D2L < Heroku::Command::Base
     run_interval = options[:interval]
     uri = URI('http://libraclips.herokuapp.com/measurements')
     req = Net::HTTP::Post.new(uri.path)
-    req.basic_auth 'tools', 'team'
+    req.basic_auth *creds
     req['Content-Type'] = 'application/json'
     body = {}
     body[:dataclip_reference] = dataclip_reference if dataclip_reference
@@ -68,7 +69,7 @@ class Heroku::Command::D2L < Heroku::Command::Base
     run_interval = options[:interval]
     uri = URI("http://libraclips.herokuapp.com/measurements/#{id}")
     req = Net::HTTP::Patch.new(uri.path)
-    req.basic_auth 'tools', 'team'
+    req.basic_auth *creds
     req['Content-Type'] = 'application/json'
     body = {}
     body[:dataclip_reference] = dataclip_reference if dataclip_reference
@@ -80,6 +81,12 @@ class Heroku::Command::D2L < Heroku::Command::Base
       http.request(req)
     }
     puts JSON.pretty_generate(JSON.parse(res.body))
+  end
+
+  private
+
+  def creds
+    Netrc.read['libraclips.herokuapp.com']
   end
 end
 
