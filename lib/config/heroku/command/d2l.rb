@@ -5,7 +5,7 @@ require 'heroku/command/base'
 
 class Heroku::Command::D2L < Heroku::Command::Base
 
-  # list
+  # d2l:list
   #
   # List all the measurements currently active
   #
@@ -15,7 +15,7 @@ class Heroku::Command::D2L < Heroku::Command::Base
     execute_and_print(uri, req)
   end
 
-  # add [dataclip]
+  # d2l:add [dataclip]
   #
   # Add a measurment for dataclip
   #
@@ -33,7 +33,7 @@ class Heroku::Command::D2L < Heroku::Command::Base
     execute_and_print(uri, req, body)
   end
 
-  # update [id]
+  # d2l:update [id]
   #
   # Update a measurment for dataclip
   #
