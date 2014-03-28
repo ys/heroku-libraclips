@@ -10,7 +10,7 @@ class Heroku::Command::D2L < Heroku::Command::Base
   #
   def list
     uri = URI('http://libraclips.herokuapp.com/measurements')
-    req = Net::HTTP::Get.new(uri)
+    req = Net::HTTP::Get.new(uri.request_uri)
     req.basic_auth 'tools', 'team'
     res = Net::HTTP.start(uri.hostname, uri.port) {|http|
         http.request(req)
