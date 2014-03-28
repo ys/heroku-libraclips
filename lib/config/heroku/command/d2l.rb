@@ -15,7 +15,7 @@ class Heroku::Command::D2L < Heroku::Command::Base
     res = Net::HTTP.start(uri.hostname, uri.port) {|http|
         http.request(req)
     }
-    puts JSON.pretty_generate(res.body)
+    puts JSON.pretty_generate(JSON.parse(res.body))
   end
 
   def add
